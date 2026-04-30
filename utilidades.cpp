@@ -1,6 +1,7 @@
 #include "utilidades.h"
 
 #include "utilidades.h"
+using namespace std;
 
 namespace CharStyle {
 
@@ -53,7 +54,47 @@ int contarCeros(const char* bloque, int n) {
     return conteo;
 }
 
-
+}
 namespace StringStyle {
 
+// Ya no necesitas poner std::string, solo string
+string textoABinario(const string& texto) {
+    string binario = "";
+    for (char c : texto) {
+        for (int i = 7; i >= 0; --i) {
+            binario += ((c >> i) & 1) ? '1' : '0';
+        }
+    }
+    return binario;
+}
+
+string binarioATexto(const string& binario) {
+    string texto = "";
+    for (size_t i = 0; i < binario.length(); i += 8) {
+        char caracter = 0;
+        for (int j = 0; j < 8; ++j) {
+            if (binario[i + j] == '1') {
+                caracter |= (1 << (7 - j));
+            }
+        }
+        texto += caracter;
+    }
+    return texto;
+}
+
+int contarUnos(const string& bloque) {
+    int conteo = 0;
+    for (char bit : bloque) {
+        if (bit == '1') conteo++;
+    }
+    return conteo;
+}
+
+int contarCeros(const string& bloque) {
+    int conteo = 0;
+    for (char bit : bloque) {
+        if (bit == '0') conteo++;
+    }
+    return conteo;
+}
 }
